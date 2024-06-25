@@ -2,7 +2,12 @@ import express from "express";
 import actorController from "../http/controllers/actorController.js";
 import directorController from "../http/controllers/directorController.js";
 import movieController from "../http/controllers/movieController.js";
-import roleController from "../http/controllers/roleController.js";  // Bu satırı düzeltin
+import roleController from "../http/controllers/roleController.js";
+import watchlistController from "../http/controllers/watchlistController.js";
+import watchedController from "../http/controllers/watchedController.js";
+import favoritesController from "../http/controllers/favoritesController.js";
+import ratingsController from "../http/controllers/ratingsController.js";
+import reviewsController from "../http/controllers/reviewsController.js";
 
 const router = express.Router();
 
@@ -42,4 +47,30 @@ router.route('/roles/:id')
     .put(roleController.updateRole)
     .delete(roleController.deleteRole);
 
-export default router;  // router'ı burada export edin
+router.route('/watchlist')
+    .get(watchlistController.getWatchlist)
+    .post(watchlistController.addToWatchlist)
+    .delete(watchlistController.removeFromWatchlist);
+
+router.route('/watched')
+    .get(watchedController.getWatched)
+    .post(watchedController.addToWatched)
+    .delete(watchedController.removeFromWatched);
+
+router.route('/favorites')
+    .get(favoritesController.getFavorites)
+    .post(favoritesController.addToFavorites)
+    .delete(favoritesController.removeFromFavorites);
+
+router.route('/ratings')
+    .get(ratingsController.getRatings)
+    .post(ratingsController.addRating)
+    .delete(ratingsController.removeRating);
+
+router.route('/reviews/:movieId')
+    .get(reviewsController.getReviews)
+    .post(reviewsController.addReview)
+    .put(reviewsController.updateReview)
+    .delete(reviewsController.removeReview);
+
+export default router;

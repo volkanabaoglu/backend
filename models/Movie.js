@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { reviewSchema } from "./Review.js";  // reviewSchema'yı içe aktarıyoruz
 
 const Schema = mongoose.Schema;
 
@@ -41,6 +42,7 @@ const movieSchema = new Schema({
       rating: { type: Number, required: true },
     },
   ],
+  reviews: [reviewSchema],
 });
 
 const Movie = mongoose.model("Movie", movieSchema);
