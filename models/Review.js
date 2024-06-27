@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const reviewSchema = new Schema({
+  movie: {
+    type: Schema.Types.ObjectId,
+    ref: "Movie",
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -15,6 +20,10 @@ const reviewSchema = new Schema({
     type: String,
     required: true,
   },
+  rating: {
+    type: Number,
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -24,4 +33,4 @@ const reviewSchema = new Schema({
 const Review = mongoose.model("Review", reviewSchema);
 
 export default Review;
-export { reviewSchema };  // Bu satır, reviewSchema'yı diğer dosyalarda kullanmamızı sağlar
+export { reviewSchema };

@@ -8,6 +8,7 @@ import watchedController from "../http/controllers/watchedController.js";
 import favoritesController from "../http/controllers/favoritesController.js";
 import ratingsController from "../http/controllers/ratingsController.js";
 import reviewsController from "../http/controllers/reviewsController.js";
+import userController from "../http/controllers/userController.js";
 
 const router = express.Router();
 
@@ -71,6 +72,21 @@ router.route('/reviews/:movieId')
     .get(reviewsController.getReviews)
     .post(reviewsController.addReview)
     .put(reviewsController.updateReview)
-    .delete(reviewsController.removeReview);
+
+
+router.route('/user/:userId/favorite-movies')
+.get(userController.getUserFavoriteMovies);
+
+router.route('/user/:userId/reviews')
+.get(userController.getUserReviews);
+
+router.route('/users')
+.post(userController.createUser);
+
+router.route('/users/:userId')
+.get(userController.getUserById)
+.put(userController.updateUser)
+.delete(userController.deleteUser);
+
 
 export default router;
