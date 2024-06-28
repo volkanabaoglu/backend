@@ -1,30 +1,43 @@
-import { Router } from 'express';
+import User from '../../models/User.js';
 
-const watchlist = [];
-
-const getWatchlist = (req, res) => {
-    res.json(watchlist);
+const getWatchlist = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await User.findById(userId).populate('watchlist');
+    res.json(user.watchlist);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-const addToWatchlist = (req, res) => {
-    const { movieId } = req.body;
-    if (!watchlist.includes(movieId)) {
-        watchlist.push(movieId);
+const addToWatchlist = async (req, res) => {
+  const { userId, movieId } = req.body;
+  try {
+    const user = await User.findById(userId);
+    if (!user.watchlist.includes(movieId)) {
+      user.watchlist.push(movieId);
+      await user.save();
     }
-    res.json(watchlist);
+    res.json(user.watchlist);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-const removeFromWatchlist = (req, res) => {
-    const { movieId } = req.body;
-    const index = watchlist.indexOf(movieId);
-    if (index > -1) {
-        watchlist.splice(index, 1);
-    }
-    res.json(watchlist);
+const removeFromWatchlist = async (req, res) => {
+  const { userId, movieId } = req.body;
+  try {
+    const user = await User.findById(userId);
+    user.watchlist.pull(movieId);
+    await user.save();
+    res.json(user.watchlist);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export default {
-    getWatchlist,
-    addToWatchlist,
-    removeFromWatchlist
+  getWatchlist,
+  addToWatchlist,
+  removeFromWatchlist
 };

@@ -30,8 +30,8 @@ const movieSchema = new Schema({
     required: true,
   },
   directors: {
-    type: Schema.Types.ObjectId,
-    ref: "MovieDirector",
+    type: Array,
+    required: true,
   },
   desc: {
     type: String,

@@ -48,22 +48,22 @@ router.route('/roles/:id')
     .put(roleController.updateRole)
     .delete(roleController.deleteRole);
 
-router.route('/watchlist')
+router.route('/watchlist/:userId')
     .get(watchlistController.getWatchlist)
     .post(watchlistController.addToWatchlist)
     .delete(watchlistController.removeFromWatchlist);
 
-router.route('/watched')
+router.route('/watched/:userId')
     .get(watchedController.getWatched)
     .post(watchedController.addToWatched)
     .delete(watchedController.removeFromWatched);
 
-router.route('/favorites')
+router.route('/favorites/:userId')
     .get(favoritesController.getFavorites)
     .post(favoritesController.addToFavorites)
     .delete(favoritesController.removeFromFavorites);
 
-router.route('/ratings')
+router.route('/ratings/:movieId')
     .get(ratingsController.getRatings)
     .post(ratingsController.addRating)
     .delete(ratingsController.removeRating);
@@ -71,22 +71,20 @@ router.route('/ratings')
 router.route('/reviews/:movieId')
     .get(reviewsController.getReviews)
     .post(reviewsController.addReview)
-    .put(reviewsController.updateReview)
-
+    .put(reviewsController.updateReview);
 
 router.route('/user/:userId/favorite-movies')
-.get(userController.getUserFavoriteMovies);
+    .get(userController.getUserFavoriteMovies);
 
 router.route('/user/:userId/reviews')
-.get(userController.getUserReviews);
+    .get(userController.getUserReviews);
 
 router.route('/users')
-.post(userController.createUser);
+    .post(userController.createUser);
 
 router.route('/users/:userId')
-.get(userController.getUserById)
-.put(userController.updateUser)
-.delete(userController.deleteUser);
-
+    .get(userController.getUserById)
+    .put(userController.updateUser)
+    .delete(userController.deleteUser);
 
 export default router;

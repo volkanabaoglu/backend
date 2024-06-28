@@ -39,6 +39,18 @@ const userSchema = new Schema({
       ref: "Movie",
     },
   ],
+  watchlist: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Movie",
+    },
+  ],
+  watchedMovies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Movie",
+    },
+  ],
   isAdmin: {
     type: Boolean,
     default: false,
